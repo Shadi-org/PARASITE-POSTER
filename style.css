@@ -1,0 +1,737 @@
+/* ==========================================================
+   PARASITE — Cinematic Analytical Poster
+   Style Sheet
+   
+   Color palette inspired by the film:
+   - Dark green:    #1a2e1a → #2d4a2d
+   - Deep black:    #0a0a0a → #141414
+   - Muted gray:    #4a4a4a → #8a8a8a
+   - Sharp white:   #f0f0f0 → #ffffff
+   - Accent warm:   #c9a84c (gold)
+   - Accent danger:  #8b2500 (deep red, for descent)
+   
+   Typography:
+   - Bebas Neue:          Display / titles
+   - Cormorant Garamond:  Section headings / quotes
+   - Inter:               Body text
+   ========================================================== */
+
+/* ——————————————————————————————————————————————
+   CSS Custom Properties
+   —————————————————————————————————————————————— */
+:root {
+  /* Core palette */
+  --clr-black:        #0a0a0a;
+  --clr-black-soft:   #141414;
+  --clr-dark:         #1a1a1a;
+  --clr-dark-green:   #1a2e1a;
+  --clr-green:        #2d4a2d;
+  --clr-green-muted:  #3d5c3d;
+  --clr-gray-dark:    #4a4a4a;
+  --clr-gray:         #8a8a8a;
+  --clr-gray-light:   #b0b0b0;
+  --clr-off-white:    #e8e4dc;
+  --clr-white:        #f0f0f0;
+  --clr-white-pure:   #ffffff;
+  --clr-gold:         #c9a84c;
+  --clr-gold-dim:     #a08636;
+  --clr-red-deep:     #8b2500;
+
+  /* Functional tokens */
+  --bg-primary:       var(--clr-black);
+  --bg-section:       var(--clr-black-soft);
+  --bg-card:          var(--clr-dark);
+  --bg-reflection:    var(--clr-off-white);
+  --text-primary:     var(--clr-white);
+  --text-secondary:   var(--clr-gray-light);
+  --text-muted:       var(--clr-gray);
+  --text-accent:      var(--clr-gold);
+  --border-subtle:    rgba(255, 255, 255, 0.08);
+  --border-gold:      rgba(201, 168, 76, 0.3);
+
+  /* Typography */
+  --ff-display:   'Bebas Neue', sans-serif;
+  --ff-heading:   'Cormorant Garamond', Georgia, serif;
+  --ff-body:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  6rem;
+  --space-2xl: 10rem;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-narrow: 800px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-fast: 0.2s var(--ease-out);
+  --transition-med:  0.4s var(--ease-out);
+}
+
+
+/* ——————————————————————————————————————————————
+   Reset & Base
+   —————————————————————————————————————————————— */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--ff-body);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--clr-gold-dim);
+}
+
+
+/* ——————————————————————————————————————————————
+   Container
+   —————————————————————————————————————————————— */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+
+/* ==========================================================
+   1. HERO SECTION — Poster-style cinematic opening
+   ========================================================== */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background image — covers the hero */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  z-index: 0;
+  filter: brightness(0.35) contrast(1.1) saturate(0.7);
+}
+
+/* Dark gradient overlay for text legibility */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 10, 10, 0.6) 0%,
+      rgba(10, 10, 10, 0.2) 40%,
+      rgba(10, 10, 10, 0.3) 60%,
+      rgba(10, 10, 10, 0.85) 100%
+    );
+}
+
+/* Text content */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--space-lg) var(--space-md);
+  max-width: 900px;
+}
+
+.hero__course {
+  font-family: var(--ff-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin-bottom: var(--space-md);
+  opacity: 0.9;
+}
+
+.hero__title {
+  font-family: var(--ff-display);
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--clr-white-pure);
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+  margin-bottom: var(--space-xs);
+}
+
+.hero__subtitle {
+  font-family: var(--ff-heading);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--clr-off-white);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-lg);
+  opacity: 0.9;
+}
+
+.hero__director {
+  font-family: var(--ff-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-gray-light);
+  margin-bottom: var(--space-xs);
+}
+
+.hero__credit {
+  font-family: var(--ff-body);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--clr-gray);
+}
+
+/* Scroll hint animation */
+.hero__scroll-hint {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.hero__scroll-hint span {
+  display: block;
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--clr-gold), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50%      { opacity: 1;   transform: scaleY(1); }
+}
+
+
+/* ==========================================================
+   2. INTRO SECTION
+   ========================================================== */
+.intro {
+  padding: var(--space-xl) 0;
+  background: var(--bg-primary);
+}
+
+.intro__quote {
+  font-family: var(--ff-heading);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--clr-off-white);
+  text-align: center;
+  max-width: var(--container-narrow);
+  margin: 0 auto var(--space-lg);
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--border-gold);
+  border-bottom: 1px solid var(--border-gold);
+  line-height: 1.6;
+}
+
+.intro__quote cite {
+  display: block;
+  font-size: 0.65em;
+  font-style: normal;
+  color: var(--clr-gold);
+  margin-top: var(--space-sm);
+  letter-spacing: 0.05em;
+}
+
+.intro__text {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.85;
+}
+
+
+/* ==========================================================
+   CLASS DIVIDER — Symbolizes upper/lower world separation
+   ========================================================== */
+.class-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
+  background: var(--bg-primary);
+}
+
+.class-divider__line {
+  flex: 0 0 200px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--clr-gold),
+    transparent
+  );
+}
+
+.class-divider__label {
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.class-divider__label--upper {
+  color: var(--clr-gold);
+}
+
+.class-divider__label--lower {
+  color: var(--clr-gray);
+}
+
+
+/* ==========================================================
+   3. THEMATIC ANALYSIS SECTIONS — Exhibition panels
+   ========================================================== */
+.analysis {
+  background: var(--bg-primary);
+  padding-bottom: var(--space-xl);
+}
+
+/* Section rule divider */
+.section-rule {
+  border: none;
+  height: 1px;
+  max-width: 120px;
+  margin: var(--space-xl) auto;
+  background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+}
+
+/* Each scene panel */
+.scene {
+  padding: var(--space-lg) 0;
+}
+
+.scene__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+/* Alternate layout: image right for --right variant */
+.scene--right .scene__grid {
+  direction: rtl;
+}
+
+.scene--right .scene__grid > * {
+  direction: ltr;
+}
+
+/* Image */
+.scene__image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.scene__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--border-subtle);
+  transition: transform var(--transition-med), filter var(--transition-med);
+  filter: saturate(0.85) contrast(1.05);
+}
+
+.scene__image-wrap:hover .scene__image {
+  transform: scale(1.02);
+  filter: saturate(1) contrast(1.1);
+}
+
+.scene__caption {
+  margin-top: var(--space-xs);
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-gray);
+}
+
+/* Text */
+.scene__text {
+  position: relative;
+}
+
+.scene__number {
+  font-family: var(--ff-display);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--clr-dark-green);
+  opacity: 0.4;
+  position: absolute;
+  top: -1.5rem;
+  left: -0.5rem;
+  pointer-events: none;
+  user-select: none;
+}
+
+.scene__title {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-white-pure);
+  margin-bottom: 0.2em;
+  line-height: 1.1;
+}
+
+.scene__focus {
+  font-family: var(--ff-heading);
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--clr-gold);
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.02em;
+}
+
+.scene__text p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.8;
+}
+
+.scene__text p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================
+   Section Headings (reusable)
+   ========================================================== */
+.section-heading {
+  font-family: var(--ff-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--clr-white-pure);
+  margin-bottom: 0.2em;
+}
+
+.section-heading--light {
+  color: var(--clr-black);
+}
+
+.section-subheading {
+  font-family: var(--ff-heading);
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  color: var(--clr-gold);
+  margin-bottom: var(--space-lg);
+  letter-spacing: 0.03em;
+}
+
+.section-subheading--light {
+  color: var(--clr-gold-dim);
+}
+
+
+/* ==========================================================
+   4. VISUAL MOTIFS SECTION — Grid of symbolic cards
+   ========================================================== */
+.motifs {
+  padding: var(--space-xl) 0;
+  background: var(--clr-dark);
+}
+
+.motifs__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+/* Individual motif card */
+.motif-card {
+  background: var(--clr-black-soft);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  transition: transform var(--transition-med), box-shadow var(--transition-med);
+  cursor: default;
+}
+
+.motif-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px var(--border-gold);
+}
+
+.motif-card__image-wrap {
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.motif-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.7) brightness(0.85);
+  transition: transform var(--transition-med), filter var(--transition-med);
+}
+
+.motif-card:hover .motif-card__image {
+  transform: scale(1.06);
+  filter: saturate(0.9) brightness(0.95);
+}
+
+.motif-card__body {
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+}
+
+.motif-card__title {
+  font-family: var(--ff-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-white-pure);
+  margin-bottom: var(--space-xs);
+}
+
+.motif-card__text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+
+/* ==========================================================
+   5. REFLECTION SECTION — Inverted light theme
+   ========================================================== */
+.reflection {
+  padding: var(--space-xl) 0 var(--space-2xl);
+  background: var(--bg-reflection);
+  position: relative;
+}
+
+/* Top edge gradient for smooth transition */
+.reflection::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, var(--clr-dark), var(--bg-reflection));
+  pointer-events: none;
+}
+
+.reflection__content {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.reflection__block {
+  padding-left: var(--space-md);
+  border-left: 2px solid var(--clr-gold);
+}
+
+.reflection__subtitle {
+  font-family: var(--ff-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--clr-dark-green);
+  margin-bottom: var(--space-xs);
+}
+
+.reflection__block p {
+  font-size: 0.95rem;
+  color: var(--clr-gray-dark);
+  line-height: 1.85;
+}
+
+
+/* ==========================================================
+   6. FOOTER
+   ========================================================== */
+.footer {
+  padding: var(--space-lg) 0;
+  background: var(--clr-black);
+  text-align: center;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer__text {
+  font-family: var(--ff-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-gray);
+  margin-bottom: var(--space-xs);
+}
+
+.footer__disclaimer {
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--clr-gray-dark);
+  font-style: italic;
+}
+
+
+/* ==========================================================
+   RESPONSIVE — Tablet (≤ 1024px)
+   ========================================================== */
+@media (max-width: 1024px) {
+  .motifs__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ==========================================================
+   RESPONSIVE — Mobile (≤ 768px)
+   ========================================================== */
+@media (max-width: 768px) {
+
+  /* Scene panels stack vertically */
+  .scene__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  /* Reset RTL direction trick on mobile */
+  .scene--right .scene__grid {
+    direction: ltr;
+  }
+
+  .scene__number {
+    font-size: 3.5rem;
+    top: -1rem;
+  }
+
+  /* Motifs: single column */
+  .motifs__grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Class divider */
+  .class-divider__line {
+    flex: 0 0 80px;
+  }
+
+  .class-divider {
+    gap: var(--space-sm);
+  }
+
+  /* Reflection blocks */
+  .reflection__block {
+    padding-left: var(--space-sm);
+  }
+
+  /* General spacing reduction */
+  .section-rule {
+    margin: var(--space-lg) auto;
+  }
+
+  .scene {
+    padding: var(--space-md) 0;
+  }
+}
+
+
+/* ==========================================================
+   RESPONSIVE — Small phones (≤ 480px)
+   ========================================================== */
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: 3.5rem;
+  }
+
+  .container {
+    padding: 0 var(--space-sm);
+  }
+
+  .intro__quote {
+    font-size: 1.2rem;
+    padding: var(--space-sm) 0;
+  }
+}
+
+
+/* ==========================================================
+   UTILITY: Reduced motion preference
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
